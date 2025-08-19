@@ -1,0 +1,1 @@
+x=float(input("A: "));print(3+10*x+x*x-20*x) if x in range(1, 5+1) else None
