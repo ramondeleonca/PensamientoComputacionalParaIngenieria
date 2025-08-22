@@ -1,0 +1,1 @@
+print("Valido") if int(input("precio: ")) > 0 else print("No valido")

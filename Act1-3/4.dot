@@ -1,0 +1,22 @@
+digraph G {
+    node [shape=box];
+
+    Start [label="Start"];
+    InputAge [label="Input Age"];
+    CheckAge [label="Is Age >= 18?"];
+    InputID [label="Input ID (s/n)"];
+    CheckID [label="Is ID == 's'?"];
+    CanGetLicense [label="Print: 'Puede obtener su licencia de conducir'"];
+    CannotGetLicense [label="Print: 'No puede obtener su licencia de conducir'"];
+    End [label="End"];
+
+    Start -> InputAge;
+    InputAge -> CheckAge;
+    CheckAge -> InputID [label="Yes"];
+    CheckAge -> CannotGetLicense [label="No"];
+    InputID -> CheckID;
+    CheckID -> CanGetLicense [label="Yes"];
+    CheckID -> CannotGetLicense [label="No"];
+    CanGetLicense -> End;
+    CannotGetLicense -> End;
+}

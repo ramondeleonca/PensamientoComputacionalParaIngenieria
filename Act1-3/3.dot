@@ -1,0 +1,18 @@
+digraph G {
+    node [shape=box, style="filled", fillcolor=lightgrey];
+    
+    Start [label="Start"];
+    Input [label="Input: Length in meters"];
+    ConvertToCm [label="Convertir a centimetros\n(length_m * 100)"];
+    ConvertToInches [label="Convertir a inches\n(length_cm / 2.54)"];
+    ConvertToFeet [label="Convertir a feet\n(length_in / 12)"];
+    Output [label="Output: Length in feet"];
+    End [label="End"];
+    
+    Start -> Input;
+    Input -> ConvertToCm;
+    ConvertToCm -> ConvertToInches;
+    ConvertToInches -> ConvertToFeet;
+    ConvertToFeet -> Output;
+    Output -> End;
+}

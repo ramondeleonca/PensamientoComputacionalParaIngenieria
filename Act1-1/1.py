@@ -1,0 +1,1 @@
+print((float(input("precio * kilo: "))*float(input("peso: "))))

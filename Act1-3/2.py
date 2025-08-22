@@ -1,0 +1,1 @@
+print("Velocidad promedio:", float(input("Distancia en km: ")) / float(input("Tiempo en horas: ")), "km/h")

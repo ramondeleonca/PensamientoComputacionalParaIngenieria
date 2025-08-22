@@ -6,9 +6,13 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Preformatted
 from reportlab.lib.styles import getSampleStyleSheet
+from graphviz import Source
 
 max_width = 450  
 max_height = 600 
+
+max_dia_width = 200  
+max_dia_height = 400 
 
 def main():
     if len(sys.argv) != 2:
@@ -29,26 +33,47 @@ def main():
     index = 1
     while True:
         png_fn = f"{index}.png"
+        dot_fn = f"{index}.dot"
         py_fn = f"{index}.py"
         png_file = os.path.join(directory, png_fn)
+        dot_file = os.path.join(directory, dot_fn)
         py_file = os.path.join(directory, py_fn)
 
         
-        if not os.path.exists(png_file) and not os.path.exists(py_file):
+        if not os.path.exists(png_file) and not os.path.exists(py_file) and not os.path.exists(dot_file):
             break
-
         
         if os.path.exists(png_file):
             elements.append(Paragraph(f"Imagen {png_fn}", styles["Heading2"]))
 
             with PILImage.open(png_file) as img:
                 w, h = img.size
-            scale = min(max_width / w, max_height / h, 1.0)
+            scale = min(max_dia_width / w, max_dia_height / h, 1.0)
             img_width = w * scale
             img_height = h * scale
 
             elements.append(Image(png_file, width=img_width, height=img_height))
             elements.append(Spacer(1, 12))
+
+        if os.path.exists(dot_file):
+            # print(dot_file)
+            # render graph dot file and add it to the PDF
+            with open(dot_file, "r", encoding="utf-8") as f:
+                dot_content = f.read()
+            src = Source(dot_content)
+            dia_file = os.path.join(directory, f"{index}-dia.png")
+            src.render(filename=os.path.splitext(dia_file)[0], format='png', cleanup=True)
+
+            with PILImage.open(dia_file) as img:
+                w, h = img.size
+            scale = min(max_width / w, max_height / h, 1.0)
+            img_width = w * scale
+            img_height = h * scale
+            
+            elements.append(Image(dia_file, width=img_width, height=img_height))
+
+            # delete dia_file after adding to PDF
+            os.remove(dia_file)
 
         
         if os.path.exists(py_file):

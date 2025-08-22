@@ -1,0 +1,20 @@
+digraph G {
+    node [shape=box];
+    Start [label="Start"];
+    InputDistance [label="input('Distancia en km: ')"];
+    InputTime [label="input('Tiempo en horas: ')"];
+    ConvertDistance [label="float(Distance)"];
+    ConvertTime [label="float(Time)"];
+    CalculateSpeed [label="Speed = Distance / Time"];
+    PrintSpeed [label="print('Velocidad promedio:', Speed, 'km/h')"];
+    End [label="End"];
+
+    Start -> InputDistance;
+    Start -> InputTime;
+    InputDistance -> ConvertDistance;
+    InputTime -> ConvertTime;
+    ConvertDistance -> CalculateSpeed;
+    ConvertTime -> CalculateSpeed;
+    CalculateSpeed -> PrintSpeed;
+    PrintSpeed -> End;
+}

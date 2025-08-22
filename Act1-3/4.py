@@ -1,0 +1,1 @@
+print("Puede obtener su licencia de conducir" if int(input("Edad: ")) >= 18 and input("Trae identificación oficial (s/n): ").lower() == 's' else "No puede obtener su licencia de conducir")

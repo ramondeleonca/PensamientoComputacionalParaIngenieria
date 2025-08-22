@@ -1,0 +1,19 @@
+digraph G {
+    node [shape=box];
+
+    start [label="Start"];
+    input [label="input(\"precio: \")"];
+    int_conversion [label="int(...)"];
+    condition [label="... > 0"];
+    print_valid [label="print(\"Valido\")"];
+    print_invalid [label="print(\"No valido\")"];
+    end [label="End"];
+
+    start -> input;
+    input -> int_conversion;
+    int_conversion -> condition;
+    condition -> print_valid [label="True"];
+    condition -> print_invalid [label="False"];
+    print_valid -> end;
+    print_invalid -> end;
+}

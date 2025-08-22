@@ -1,0 +1,16 @@
+digraph {
+    rankdir=TB
+
+    node [shape=box, style=filled, fillcolor=lightblue]
+
+    Inicio [shape=ellipse, fillcolor=green]
+
+    Input [shape=parallelogram, label="precio: float\npeso: float"]
+    Process [label="costo=precio*peso"]
+
+    Print [shape=note, label="print(costo)"]
+    
+    End [shape=ellipse, fillcolor=red]
+
+    Inicio -> Input -> Process -> Print -> End
+}
